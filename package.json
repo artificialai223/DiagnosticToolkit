@@ -1,0 +1,27 @@
+{
+  "name": "windows-diagnostic-toolkit",
+  "version": "1.0.0",
+  "description": "Modular Windows diagnostics toolkit compiled into a single EXE",
+  "main": "src/main.js",
+  "bin": "src/main.js",
+  "scripts": {
+    "start": "node src/main.js",
+    "build": "pkg -t node18-win-x64 --compress Brotli -o dist/diagnostics.exe src/main.js"
+  },
+  "pkg": {
+    "targets": [
+      "node18-win-x64"
+    ],
+    "scripts": [
+      "src/**/*.js"
+    ],
+    "assets": []
+  },
+  "dependencies": {
+    "express": "^4.21.2",
+    "ws": "^8.18.0"
+  },
+  "devDependencies": {
+    "pkg": "^5.8.1"
+  }
+}

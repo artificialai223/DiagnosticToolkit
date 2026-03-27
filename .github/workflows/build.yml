@@ -1,0 +1,45 @@
+name: Build and Publish diagnostics.exe
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "18"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build EXE
+        run: npm run build
+
+      - name: Verify output
+        shell: pwsh
+        run: |
+          if (-not (Test-Path "dist/diagnostics.exe")) {
+            throw "dist/diagnostics.exe not found"
+          }
+
+      - name: Create/Update GitHub Release and upload asset
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/diagnostics.exe
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

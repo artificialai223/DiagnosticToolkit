@@ -1,1 +1,43 @@
-# DiagnosticToolkit
+# Windows Diagnostic Toolkit
+
+Modular JavaScript diagnostics toolkit that compiles to one standalone Windows executable.
+
+## Build
+
+```powershell
+npm install
+npm run build
+```
+
+Output:
+
+- `dist/diagnostics.exe`
+
+## Alternative explicit pkg command
+
+```powershell
+npx pkg -t node18-win-x64 --compress Brotli -o dist/diagnostics.exe src/main.js
+```
+
+If your local `pkg` runtime supports generic targets, this equivalent pattern is also valid:
+
+```powershell
+npx pkg -t win-x64 --compress Brotli -o dist/diagnostics.exe src/main.js
+```
+
+## Run (headless)
+
+```powershell
+dist\diagnostics.exe
+```
+
+Remote pull + run example:
+
+```powershell
+curl -sL https://server.com/diagnostics.exe -o diag.exe
+diag.exe
+```
+
+## Report output
+
+- `C:\Windows\Temp\SystemHealthReport.html`
