@@ -34,7 +34,7 @@ dist\diagnostics.exe
 Remote pull + run example:
 
 ```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -Command "$u='https://github.com/artificialai223/DiagnosticToolkit/releases/latest/download/diagnostics.exe'; $p='$env:TEMP\diagnostics.exe'; iwr $u -OutFile $p; & $p"
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$u='https://github.com/artificialai223/DiagnosticToolkit/releases/latest/download/diagnostics.exe'; $p=Join-Path $env:TEMP 'diagnostics.exe'; $ProgressPreference='SilentlyContinue'; curl.exe -L --retry 3 --retry-all-errors --output $p $u; & $p"
 ```
 
 ## Report output
