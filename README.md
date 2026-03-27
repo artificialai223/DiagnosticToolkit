@@ -34,8 +34,7 @@ dist\diagnostics.exe
 Remote pull + run example:
 
 ```powershell
-curl -sL https://server.com/diagnostics.exe -o diag.exe
-diag.exe
+powershell -NoProfile -ExecutionPolicy Bypass -Command "$u='https://github.com/artificialai223/DiagnosticToolkit/releases/latest/download/diagnostics.exe'; $p='$env:TEMP\diagnostics.exe'; iwr $u -OutFile $p; & $p"
 ```
 
 ## Report output
